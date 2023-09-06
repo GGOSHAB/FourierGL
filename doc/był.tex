@@ -1,0 +1,78 @@
+\documentclass{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+% \usepackage{lmodern}
+
+\usepackage{amsmath}
+
+\newcommand{\rl}{\hspace*{5mm}}
+\renewcommand{\phi}{\varphi}
+
+\title{Padarunak majamu ščaściu}    
+\author{Tvoj Hoška\thanks{Ja ciabie kachaju!}}
+\date{11 žniŭnia 2023 h.}
+\begin{document}
+\maketitle
+\begin{center}
+    Pryviatańnie, majo kacianio! Ja zrabiŭ ciabie padarunak na tvoj dzień naradžeńnia, ty zaraz čytaješ tłumačeńnie, jak pracuje to, što ty ŭbačyła. \\
+    \vspace{3mm}
+    Ja ciabie vielmi kachaju i žadaju, kab ty zastavałasia samaj pryhožaj, samaj dobraj i najlepšaj dziačynkaj, i kab ty, maleńki cud, praciahvaŭ radavać uvieś śviet saboju! Ty ŭ mianie takoje soniejka!
+\end{center}
+\newpage
+\section{Viektara}
+\rl Jak ty mahła ŭbačyć, heta ŭ svajoj sutnaści nabor viaktaroŭ, jakija kružacca pa svajoj asi.
+Luby viektar možna pradstavić u vyhladzie ličb, u našym vypadku heta buduć kampleksnyja.
+Nahadaju, što kampleksnaja ličba \--- heta para $(a, b)$, dzie $a$ \--- realnaja častka, a $b$ \--- mnimaja, i sama hetaja ličba $a + bi$,
+a $i$ vyznačajecca nastupnym čynam: $i^2 = -1$
+\[ \begin{pmatrix} x \\ y \end{pmatrix} \leftrightarrow x + yi \]
+\begin{center}
+    \scriptsize Suviaź pamiž viektaram $\begin{pmatrix} x \\ y \end{pmatrix}$ i kampleksnaj ličbaj $x + yi$: možna zrabić bijekcyju
+\end{center}
+\section{Formuła E
+
+pleksnaj płoskaści $e^{z}$, $\sin{z}$ i $\cos{z}$ hetaj sumaj. Zaraz pasprabujem padstavić u ekspanientu $z = i\phi$
+\begin{align*}
+    e^{i\phi} = \sum_{n = 0}^{\infty}{\frac{(i\phi)^n}{n!}} = \sum_{n = 0}^{\infty}{\frac{(i\phi)^{2n}}{(2n)!}} + \sum_{n = 0}^{\infty}{\frac{(i\phi)^{2n + 1}}{(2n + 1)!}} = \\
+    = \sum_{n = 0}^{\infty}{\frac{(-1)^{n}}{(2n)!}\phi^{2n}} + i\sum_{n = 0}^{\infty}{\frac{(-1)^{n}}{(2n + 1)!}\phi^{2n + 1}} = \\
+    = \cos{\phi} + i \sin{\phi}
+\end{align*}
+\rl Takim čynam padstaŭlaja sinusy i kosinusy zamiest ekvivalentnych im radoŭ atrymlivajem formułu Ejlera
+\[ e^{i\phi} = \cos{\phi} + i\sin{\phi} \]
+\rl Z hetaha možna zrabić vyvad, što $e^{i\phi}$ budzie kropkaj na akružnaści daŭžynioj 1, radyus da jakoj budzie ŭtvarać vuhał $\phi$ suprać hadzinnaj strełki
+\section{Padrabiaźniej pra viektara}
+\rl Ale heta ž tolki adziny sposab zadać viektara. Jość jašče druhi: my možam apisać viektar vykarystoŭvaja jaho daŭžyniu i vuhał nakłonu.
+Chaj hety vuhał $\phi$ budzie suprać hadzinnaj strełki. \\
+\rl Tady viektar zadajecca nastupnaj paraj: $(r, \phi)$, dzie $r$ \--- radyus(daŭžynia) viektara.
+Z formuły Ejlera niaciažka vyvieści vyhlad u kampleksnaj natacyi
+\[ e^{i\phi} = \cos{\phi} + i\sin{\phi} \]
+\[ (r, \phi) \leftrightarrow re^{i\phi} \]
+\rl Nahadaju, što $\cos{\phi}$ i $\sin{\phi}$ heta daŭžynia praekcyi viektara daŭžyni 1 z vuhłom $\phi$ na voś $OX$ i $OY$ adpaviedna, inšymi słovami jaho $x$ i $y$
+\section{Pieraŭtvareńnie Furje}
+\rl Jak ty mabyć pamiataješ, Pieraŭtvareńnie Furje vyhladaje nastupnym čynam
+\[ \hat{f}(\omega) = \int_{-\infty}^{\infty}{f(t)e^{i\omega t}dt} \]
+\begin{center}
+    \scriptsize $f$ \--- sihnał, $\omega$ \--- častata, $t$ \--- čas
+\end{center}
+\rl Ale ŭ dyskretnym varyjańce jano vyhladaje tak
+\[ \hat{f}_k = \sum_{n = 0}^{N - 1}{f_n e^{\frac{2\pi k}{N}n}} \]
+\[ \hat{f}_k = \sum_{n = 0}^{N - 1}{f_n \omega^{nk}} \]
+\begin{center}
+    \scriptsize $k$ \--- indeks častaty, $N$ \--- daŭžynia sihnału, $\omega = e^{\frac{2\pi}{N}}$ \--- pieršaabrazny korań z 1, z formuły Ejlera zrazumieła,
+    što korani z 1 raźmieščany raŭnamierna
+\end{center}
+\rl Abratnaje Pieraŭtvareńnie Furje vyhladaje nastupnym čynam
+\[ f(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty}{\hat{f}(\omega)e^{-i\omega t} d\omega} \]
+\[ f_n = \frac{1}{N} \sum_{k = 0}^{N - 1}{\hat{f}_k e^{-\frac{2\pi k}{N} n}} \]
+\[ f_n = \frac{1}{N} \sum_{k = 0}^{N - 1}{\hat{f}_k \omega^{-nk}}\]
+\rl k-e Dyskretnaje Pieraŭtvareńnie Furje možna razhledžvać u sensie padstaŭleńnia $z = \omega^k$ u mnahačlen $f(z) = \sum_{n = 0}^{N - 1}{f_n z^n}$, a abratnaje \--- interpalacyjaj ischodnaha mnahačlena,
+adnaŭleńnia pa kropkam $\hat{f}_k$
+\section{Jak heta pracuje?}
+\rl Što ž, my padabralisia da samoj suci. Jak heta pracuje? \\
+\rl Voźmiem tyja kropki(abaznačym $k$-uju z ich $z'_k$), jakija my žadajem namalavać. Adsarcirujem ich pa vuhłu suprać hadzinnaj strełki. Prymianim da ich Abratnaje Dyskretnaje Pieraŭtvareńnie Furje. 
+Na vychadzie atrymajem kaeficyjenty da mnahačlena $f(z)$, jaki pry padstanovie $z = \omega^k$ daje nam $z'_k$. Budziem pa čarazie padstaŭlać u $f(z)$ $z = e^{it}$, dzie $t$ \--- heta čas, kab zrabić kručeńnie viaktaroŭ
+\section{Realizacyja}
+\rl Kruhi i viektara rysuje videakarta na zadniem fonie, tamu na tvajom noutbukie adrysoŭka moža być vielmi doŭhaja. Dla kožnaha piksiela fonu ja vyličvaju, ci uvachodzić jon u jaki-niebudź kruh abo viektar.
+Adnačasova na hałoŭnym płanie ja rysuju linii, jakija złučvajuć kropki, jakija ja paličyŭ raniej
+\end{document}

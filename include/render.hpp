@@ -102,7 +102,7 @@ vector<cf> heart = {
     {0.051421773469,1.3151898708372},
 };
 
-auto obj = convert(czt(heart, true));
+auto obj = convert(czt(square, true));
 
 int width, height;
 float scale;

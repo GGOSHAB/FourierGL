@@ -30,7 +30,7 @@ vec2 drawEpicycle(vec2 o, float r, float phi) {
     return _p; 
 }
 
-const int maxn = 256;
+const int maxn = 1024;
 uniform float r[maxn], phi[maxn];
 uniform int n; 
 

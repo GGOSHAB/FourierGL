@@ -5,11 +5,11 @@
 using std::vector;
 #include <complex>
 using std::complex;
-typedef complex<float> cf;
+typedef complex<double> cd;
 
-const float pi = std::acos(-1);
+const double pi = std::acos(-1);
 
-void fft(vector<cf> &a, bool inv) {
+void fft(vector<cd> &a, bool inv) {
     int n = a.size(), logn = std::__lg(n);
     for (int i = 0; i < n; ++i) {
         int j = 0;
@@ -23,11 +23,11 @@ void fft(vector<cf> &a, bool inv) {
 
     for (int len = 2; len <= n; len <<= 1) {
         int k = len >> 1;
-        cf wlen = std::polar(1.0f, (inv ? -1 : 1) * 2.0f * pi / len);
+        cd wlen = std::polar(1.0, (inv ? -1 : 1) * 2.0 * pi / len);
         for (int i = 0; i < n; i += len) {
-            cf w = 1.0f;
+            cd w = 1.0f;
             for (int j = 0; j < k; ++j) {
-                cf u = a[i + j], v = w * a[i + j + k];
+                cd u = a[i + j], v = w * a[i + j + k];
                 a[i + j] = u + v;
                 a[i + j + k] = u - v;
                 w *= wlen;
@@ -42,7 +42,7 @@ void fft(vector<cf> &a, bool inv) {
     }
 }
 
-vector<cf> mult(const vector<cf> &a, const vector<cf> &b) {
+vector<cd> mult(const vector<cd> &a, const vector<cd> &b) {
     auto ffa = a, ffb = b;
     int n = 1;
     while (n < ffa.size() + ffb.size()) {
@@ -57,17 +57,17 @@ vector<cf> mult(const vector<cf> &a, const vector<cf> &b) {
     return ffa;
 }
 
-vector<cf> czt(const vector<cf> &a, bool inv) {
+vector<cd> czt(const vector<cd> &a, bool inv) {
     int n = a.size();
-    vector<cf> x(n), y(2 * n);
+    vector<cd> x(n), y(2 * n);
     for (int i = 0; i < n; ++i) {
-        y[n - i] = y[n + i] = std::polar(1.0f, (inv ? 1 : -1) * pi * i * i / n);
+        y[n - i] = y[n + i] = std::polar(1.0, (inv ? 1 : -1) * pi * i * i / n);
     }
     for (int i = 0; i < n; ++i) {
         x[i] = a[i] * std::conj(y[n + i]);
     }
 
-    vector<cf> _ft = mult(x, y), ft(n);
+    vector<cd> _ft = mult(x, y), ft(n);
     for (int i = 0; i < n; ++i) {
         ft[i] = _ft[n + i] * std::conj(y[n + i]);
         if (inv) {
@@ -79,10 +79,10 @@ vector<cf> czt(const vector<cf> &a, bool inv) {
 }
 
 struct epicycle {
-    float r, phi, v;
+    double r, phi, v;
 };
 
-vector<epicycle> convert(const vector<cf> &a) {
+vector<epicycle> convert(const vector<cd> &a) {
     int n = a.size();
     vector<epicycle> e(n);
     for (int i = 0; i < n; ++i) {

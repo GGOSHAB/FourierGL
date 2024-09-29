@@ -5,6 +5,7 @@
 #include "shader.hpp"
 #include "buffers.hpp"
 #include "fft.hpp"
+#include "objects.hpp"
 
 vector<float> plane = {
     -1.0f, 1.0f,
@@ -20,7 +21,7 @@ vector<float> line = {
     0.0f, 0.0f,
 };
 
-vector<cf> square = {
+vector<cd> square = {
     {0.0f, 1.0f},
     {-1.0f, 1.0f},
     {-1.0f, 0.0f},
@@ -31,7 +32,7 @@ vector<cf> square = {
     {1.0f, 1.0f},
 };
 
-vector<cf> heart = {
+vector<cd> heart_old = {
     {0, 1.2147841848609},
     {-0.051421773469,1.3151898708372},
     {-0.1141753272042,1.4030448460664},
@@ -102,7 +103,7 @@ vector<cf> heart = {
     {0.051421773469,1.3151898708372},
 };
 
-auto obj = convert(czt(square, true));
+auto obj = convert(czt(heart, true));
 
 int width, height;
 float scale;
@@ -116,13 +117,13 @@ void shaderInit() {
     lineShader = Shader("shaders/input.vs", "shaders/line.fs");
 }
 
-float t = 0;
+double t = 0;
 
-vector<cf> pts;
+vector<complex<float>> pts;
 void render(float step) {
     planeShader.enable();
 
-    t += step;
+    // t += step;
 
     for (int i = 0; i < obj.size(); ++i) {
         planeShader.setFloat("phi[" + std::to_string(i) + "]", obj[i].phi + obj[i].v * t);
@@ -134,16 +135,16 @@ void render(float step) {
 
     lineShader.enable();
 
-    cf p = 0.0f;
+    cd p = 0.0f;
     for (auto [r, phi, v] : obj) {
-        p += r * std::polar(1.0f, phi + v * t);
+        p += r * std::polar(1.0, phi + v * t);
     }
     p /= scale;
     p.real(p.real() / width * height);
 
     glBindVertexArray(lineVAO);
     if (t <= 2 * pi + 0.01) {
-        pts.push_back(p);
+        pts.push_back({(float)p.real(), (float)p.imag()});
     }
     for (int i = 0; i < pts.size() - 1; ++i) {
         line = {
@@ -157,6 +158,8 @@ void render(float step) {
         glDrawArrays(GL_LINES, 0, 2);
     }
     glBindVertexArray(0);
+
+    t += 2 * pi / obj.size();
 }
 
 #endif
